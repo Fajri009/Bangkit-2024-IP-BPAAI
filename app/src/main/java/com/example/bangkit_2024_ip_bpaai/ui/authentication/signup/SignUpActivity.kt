@@ -1,36 +1,50 @@
 package com.example.bangkit_2024_ip_bpaai.ui.authentication.signup
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
+import android.animation.*
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.bangkit_2024_ip_bpaai.R
-import com.example.bangkit_2024_ip_bpaai.data.Result
 import com.example.bangkit_2024_ip_bpaai.databinding.ActivitySignUpBinding
-import com.example.bangkit_2024_ip_bpaai.ui.ViewModelFactory
 import com.example.bangkit_2024_ip_bpaai.ui.authentication.login.LoginActivity
 import com.example.bangkit_2024_ip_bpaai.utils.isValidEmail
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var viewModel: SignUpViewModel
+    private val viewModel: SignUpViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val application = ViewModelFactory.getInstance(this@SignUpActivity.application)
-        viewModel = ViewModelProvider(this@SignUpActivity, application).get(SignUpViewModel::class.java)
+        viewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
 
         playAnimation()
         login()
         signUp()
+
+        viewModel.errorMessage.observe(this) { errorMessage ->
+            if (errorMessage.isNotEmpty()) {
+                if (errorMessage == "SIGN UP ERROR : Email is already taken") {
+                    Toast.makeText(this@SignUpActivity, R.string.already_taken, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        viewModel.isSuccess.observe(this) {
+            if (it) {
+                val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
+                startActivity(intent)
+                showToast(R.string.try_login)
+            }
+        }
     }
 
     private fun playAnimation() {
@@ -67,33 +81,30 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.btnSignUp.setOnClickListener {
             if (edRegisterName!!.isEmpty() || edRegisterEmail!!.isEmpty() || edRegisterPassword!!.isEmpty()) {
-                Toast.makeText(this@SignUpActivity, R.string.empty_form, Toast.LENGTH_SHORT).show()
+                showToast(R.string.empty_form)
             } else if (!isValidEmail(edRegisterEmail.toString()) || edRegisterPassword.length < 8) {
-                Toast.makeText(this@SignUpActivity, R.string.invalid_form, Toast.LENGTH_SHORT).show()
+                showToast(R.string.invalid_form)
                 Log.i("test", edRegisterEmail.toString())
             } else {
                 viewModel.register(
                     edRegisterName.toString(),
                     edRegisterEmail.toString(),
                     edRegisterPassword.toString()
-                ).observe(this@SignUpActivity) { result ->
-                    when (result) {
-                        is Result.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
-                        }
-                        is Result.Success -> {
-                            binding.progressBar.visibility = View.GONE
-                            val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
-                            startActivity(intent)
-                            Toast.makeText(this@SignUpActivity, R.string.try_login, Toast.LENGTH_SHORT).show()
-                        }
-                        is Result.Error -> {
-                            binding.progressBar.visibility = View.GONE
-                            Toast.makeText(this@SignUpActivity, result.error, Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
+                )
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility =
+            if (isLoading) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+    }
+
+    private fun showToast(message: Int) {
+        Toast.makeText(this@SignUpActivity, message, Toast.LENGTH_SHORT).show()
     }
 }

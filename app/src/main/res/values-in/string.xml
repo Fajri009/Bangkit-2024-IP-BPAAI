@@ -15,5 +15,6 @@
     <string name="have_acc">Sudah mempunyai akun?</string>
     <string name="empty_form">Isi data form terlebih dahulu</string>
     <string name="try_login">Daftar akun berhasil! Silakan coba masuk ke akun Anda</string>
+    <string name="already_taken">DAFTAR ERROR : Email sudah terdaftar</string>
     <string name="invalid_form">Silakan isi data formulir sesuai ketentuan</string>
 </resources>

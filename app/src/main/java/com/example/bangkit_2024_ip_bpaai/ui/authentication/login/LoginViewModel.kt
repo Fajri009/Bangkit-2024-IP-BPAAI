@@ -1,14 +1,15 @@
-package com.example.bangkit_2024_ip_bpaai.ui.authentication.signup
+package com.example.bangkit_2024_ip_bpaai.ui.authentication.login
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.bangkit_2024_ip_bpaai.data.remote.response.RegisterResponse
+import com.example.bangkit_2024_ip_bpaai.data.remote.response.LoginResponse
 import com.example.bangkit_2024_ip_bpaai.data.remote.retrofit.ApiConfig
 import org.json.JSONObject
 import retrofit2.*
 
-class SignUpViewModel: ViewModel() {
-    val signUp = MutableLiveData<RegisterResponse>()
+class LoginViewModel: ViewModel() {
+    private val _loginResult = MutableLiveData<LoginResponse>()
+    val loginResult: LiveData<LoginResponse> = _loginResult
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -19,28 +20,29 @@ class SignUpViewModel: ViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> = _isSuccess
 
-    fun register(name: String, email: String, password: String) {
+    fun login(email: String, password: String) {
         _isLoading.value = true
         _isSuccess.value = false
 
-        val client = ApiConfig.getApiService().register(name, email, password)
-        client.enqueue(object : Callback<RegisterResponse> {
-            override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
+        val client = ApiConfig.getApiService().login(email, password)
+        client.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 _isLoading.value = false
+
                 if (response.isSuccessful) {
-                    signUp.postValue(response.body())
+                    _loginResult.value = response.body()
                     _isSuccess.value = true
                 } else {
                     response.errorBody()?.let {
                         val errorResponse = JSONObject(it.string())
                         val errorMessages = errorResponse.getString("message")
-                        _errorMessage.postValue("SIGN UP ERROR : $errorMessages")
+                        _errorMessage.postValue("LOGIN ERROR : $errorMessages")
                     }
                     _isSuccess.value = false
                 }
             }
 
-            override fun onFailure(call: Call<RegisterResponse>, e: Throwable) {
+            override fun onFailure(call: Call<LoginResponse>, e: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${e.message}")
             }
@@ -48,6 +50,6 @@ class SignUpViewModel: ViewModel() {
     }
 
     companion object {
-        private const val TAG = "SignUpViewModel"
+        private const val TAG = "LoginViewModel"
     }
 }

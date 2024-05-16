@@ -14,5 +14,6 @@
     <string name="have_acc">Already have an account?</string>
     <string name="empty_form">Please fill in the form fields</string>
     <string name="try_login">Register Success! Please try to login to your account</string>
+    <string name="already_taken">SIGN UP ERROR : Email is already taken</string>
     <string name="invalid_form">Please fill in the form data according to the requirements</string>
 </resources>
