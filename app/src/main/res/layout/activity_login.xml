@@ -15,9 +15,11 @@
         android:layout_height="130dp"
         android:layout_marginTop="70dp"
         android:src="@drawable/logo_story_app_background"
+        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:alpha="1" />
 
     <TextView
         android:id="@+id/tv_login"
@@ -27,8 +29,10 @@
         android:layout_marginTop="30dp"
         android:text="@string/login"
         android:textStyle="bold"
+        android:alpha="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+        tools:alpha="1" />
 
     <TextView
         android:id="@+id/tv_enter"
@@ -37,8 +41,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="@string/enter_email_password"
+        android:alpha="0"
         app:layout_constraintStart_toStartOf="@+id/tv_login"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_login"
+        tools:alpha="1" />
 
     <TextView
         android:id="@+id/tv_email"
@@ -48,19 +54,23 @@
         android:layout_marginTop="30dp"
         android:text="@string/email"
         android:textStyle="bold"
+        android:alpha="0"
         app:layout_constraintStart_toStartOf="@+id/tv_enter"
-        app:layout_constraintTop_toBottomOf="@+id/tv_enter" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_enter"
+        tools:alpha="1" />
 
     <com.example.bangkit_2024_ip_bpaai.ui.custom.EmailEditText
-        android:id="@+id/ed_email"
+        android:id="@+id/ed_login_email"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/outlined_text"
         android:padding="15dp"
+        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_email"
+        tools:alpha="1" />
 
     <TextView
         android:id="@+id/tv_password"
@@ -70,22 +80,26 @@
         android:layout_marginTop="30dp"
         android:text="@string/password"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/ed_email"
-        app:layout_constraintTop_toBottomOf="@+id/ed_email" />
+        android:alpha="0"
+        app:layout_constraintStart_toStartOf="@+id/ed_login_email"
+        app:layout_constraintTop_toBottomOf="@+id/ed_login_email"
+        tools:alpha="1" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ed_layout_password"
+        android:id="@+id/ed_layout_login_password"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
+        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_password"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        tools:alpha="1" >
 
         <com.example.bangkit_2024_ip_bpaai.ui.custom.PasswordEditText
-            android:id="@+id/ed_password"
+            android:id="@+id/ed_login_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/outlined_text"
@@ -94,14 +108,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:orientation="horizontal"
+        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ed_layout_password">
+        app:layout_constraintTop_toBottomOf="@id/ed_layout_login_password"
+        tools:alpha="1">
 
         <TextView
             style="@style/TextAppearance.AppCompat.BodyMedium"
@@ -128,7 +144,9 @@
         android:layout_marginTop="15dp"
         android:text="@string/login"
         android:textAllCaps="true"
+        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout"
+        tools:alpha="1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
