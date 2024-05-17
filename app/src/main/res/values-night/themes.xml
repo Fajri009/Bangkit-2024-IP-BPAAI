@@ -5,4 +5,10 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorSecondary">@color/color_secondary</item>
     </style>
+
+    <style name="BackgroundColor">
+        <item name="background">@color/color_primary</item>
+        <item name="backgroundTint">@color/color_primary</item>
+        <item name="tint">@color/white</item>
+    </style>
 </resources>

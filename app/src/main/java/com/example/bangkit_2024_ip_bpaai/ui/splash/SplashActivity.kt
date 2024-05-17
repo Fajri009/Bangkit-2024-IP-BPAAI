@@ -5,19 +5,33 @@ import android.content.Intent
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangkit_2024_ip_bpaai.R
-import com.example.bangkit_2024_ip_bpaai.ui.authentication.login.LoginActivity
+import com.example.bangkit_2024_ip_bpaai.data.local.User
+import com.example.bangkit_2024_ip_bpaai.data.local.UserPreferences
+import com.example.bangkit_2024_ip_bpaai.ui.auth.login.LoginActivity
+import com.example.bangkit_2024_ip_bpaai.ui.home.HomeActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+    private lateinit var userModel: User
+    private lateinit var userPreferences: UserPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
         supportActionBar?.hide()
 
+        userPreferences = UserPreferences(this)
+        userModel = userPreferences.getUser()
+
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashActivity, LoginActivity::class.java)
-            startActivity(intent)
+            if (userModel.token == "") {
+                val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+                startActivity(intent)
+            }
             finish()
         }, SPLASH_TIME_OUT)
     }

@@ -17,4 +17,12 @@
     <string name="try_login">Daftar akun berhasil! Silakan coba masuk ke akun Anda</string>
     <string name="already_taken">DAFTAR ERROR : Email sudah terdaftar</string>
     <string name="invalid_form">Silakan isi data formulir sesuai ketentuan</string>
+
+    <!-- Home -->
+    <string name="translate">Terjemahan</string>
+    <string name="account">Akun</string>
+    <string name="image_story">Gambar</string>
+    <string name="name_story">Nama</string>
+    <string name="desc_story">Deskripsi</string>
+    <string name="created_at_story">11 Februari 2024</string>
 </resources>

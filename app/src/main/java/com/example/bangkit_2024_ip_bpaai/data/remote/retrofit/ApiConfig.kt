@@ -1,6 +1,7 @@
 package com.example.bangkit_2024_ip_bpaai.data.remote.retrofit
 
 import com.example.bangkit_2024_ip_bpaai.BuildConfig
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

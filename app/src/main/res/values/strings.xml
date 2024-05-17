@@ -16,4 +16,12 @@
     <string name="try_login">Register Success! Please try to login to your account</string>
     <string name="already_taken">SIGN UP ERROR : Email is already taken</string>
     <string name="invalid_form">Please fill in the form data according to the requirements</string>
+
+    <!-- Home -->
+    <string name="translate">Translate</string>
+    <string name="account">Account</string>
+    <string name="image_story">Image</string>
+    <string name="name_story">Name</string>
+    <string name="desc_story">Description</string>
+    <string name="created_at_story">11 February 2024</string>
 </resources>

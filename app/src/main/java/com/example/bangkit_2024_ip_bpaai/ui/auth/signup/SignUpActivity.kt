@@ -1,4 +1,4 @@
-package com.example.bangkit_2024_ip_bpaai.ui.authentication.signup
+package com.example.bangkit_2024_ip_bpaai.ui.auth.signup
 
 import android.animation.*
 import android.content.Intent
@@ -10,7 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangkit_2024_ip_bpaai.R
 import com.example.bangkit_2024_ip_bpaai.databinding.ActivitySignUpBinding
-import com.example.bangkit_2024_ip_bpaai.ui.authentication.login.LoginActivity
+import com.example.bangkit_2024_ip_bpaai.ui.auth.login.LoginActivity
 import com.example.bangkit_2024_ip_bpaai.utils.isValidEmail
 
 class SignUpActivity : AppCompatActivity() {
@@ -84,7 +84,6 @@ class SignUpActivity : AppCompatActivity() {
                 showToast(R.string.empty_form)
             } else if (!isValidEmail(edRegisterEmail.toString()) || edRegisterPassword.length < 8) {
                 showToast(R.string.invalid_form)
-                Log.i("test", edRegisterEmail.toString())
             } else {
                 viewModel.register(
                     edRegisterName.toString(),

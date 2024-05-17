@@ -8,6 +8,18 @@
 
     <style name="Theme.Bangkit2024IPBPAAI" parent="Base.Theme.Bangkit2024IPBPAAI" />
 
+    <style name="BackgroundPrimaryColor">
+        <item name="android:background">@color/color_primary</item>
+        <item name="android:backgroundTint">@color/color_primary</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="BackgroundSecondaryColor">
+        <item name="android:background">@color/color_secondary</item>
+        <item name="android:backgroundTint">@color/color_secondary</item>
+        <item name="tint">@color/black</item>
+    </style>
+
     <style name="TextAppearance.AppCompat.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
         <item name="fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">57sp</item>
