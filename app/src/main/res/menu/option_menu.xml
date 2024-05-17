@@ -8,9 +8,9 @@
             android:title="@string/translate"
             app:showAsAction="ifRoom" />
         <item
-            android:id="@+id/account"
-            android:icon="@drawable/ic_account"
-            android:title="@string/account"
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/logout"
             app:showAsAction="ifRoom" />
     </group>
 </menu>

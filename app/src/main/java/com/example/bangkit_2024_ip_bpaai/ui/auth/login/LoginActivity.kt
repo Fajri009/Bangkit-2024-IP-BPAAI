@@ -42,18 +42,11 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        viewModel.isSuccess.observe(this) {
-            if (it) {
-                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                startActivity(intent)
-            }
-        }
-
-        viewModel.loginResult.observe(this) { result ->
-            userModel.token = result.loginResult?.token
-            userPreference.setUser(userModel)
-        }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
     }
 
     private fun playAnimation() {
@@ -108,6 +101,18 @@ class LoginActivity : AppCompatActivity() {
                     edLoginEmail.toString(),
                     edLoginPassword.toString()
                 )
+
+                viewModel.isSuccess.observe(this) {
+                    if (it) {
+                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+
+                viewModel.loginResult.observe(this) { result ->
+                    userModel.token = result.loginResult?.token
+                    userPreference.setUser(userModel)
+                }
             }
         }
     }

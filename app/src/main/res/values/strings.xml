@@ -4,7 +4,7 @@
     <!-- Authentication -->
     <string name="login">Login</string>
     <string name="enter_email_password">Enter your email and password</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
     <string name="invalid_email">Use email format</string>
     <string name="password">Password</string>
     <string name="invalid_password">Password must not be less than 8 characters</string>
@@ -19,9 +19,12 @@
 
     <!-- Home -->
     <string name="translate">Translate</string>
-    <string name="account">Account</string>
+    <string name="logout">Logout</string>
     <string name="image_story">Image</string>
     <string name="name_story">Name</string>
     <string name="desc_story">Description</string>
     <string name="created_at_story">11 February 2024</string>
+
+    <!-- Detail -->
+    <string name="back">Back</string>
 </resources>

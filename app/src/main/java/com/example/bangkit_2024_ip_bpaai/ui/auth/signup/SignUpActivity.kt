@@ -37,14 +37,6 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
         }
-
-        viewModel.isSuccess.observe(this) {
-            if (it) {
-                val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
-                startActivity(intent)
-                showToast(R.string.try_login)
-            }
-        }
     }
 
     private fun playAnimation() {
@@ -90,6 +82,14 @@ class SignUpActivity : AppCompatActivity() {
                     edRegisterEmail.toString(),
                     edRegisterPassword.toString()
                 )
+
+                viewModel.isSuccess.observe(this) {
+                    if (it) {
+                        val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                        showToast(R.string.try_login)
+                    }
+                }
             }
         }
     }

@@ -17,7 +17,7 @@ class HomeViewModel: ViewModel() {
     fun getStories(token: String) {
         _isLoading.value = true
 
-        val client = ApiConfig.getApiService().getStories(token)
+        val client = ApiConfig.getApiService().getStories("Bearer $token")
         client.enqueue(object: Callback<Story> {
             override fun onResponse(
                 call: Call<Story>,

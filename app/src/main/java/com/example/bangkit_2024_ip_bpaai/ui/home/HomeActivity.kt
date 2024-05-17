@@ -3,8 +3,6 @@ package com.example.bangkit_2024_ip_bpaai.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +12,8 @@ import com.example.bangkit_2024_ip_bpaai.data.local.User
 import com.example.bangkit_2024_ip_bpaai.data.local.UserPreferences
 import com.example.bangkit_2024_ip_bpaai.data.remote.response.ListStoryItem
 import com.example.bangkit_2024_ip_bpaai.databinding.ActivityHomeBinding
-import com.example.bangkit_2024_ip_bpaai.ui.account.AccountActivity
 import com.example.bangkit_2024_ip_bpaai.ui.add.AddStoryActivity
+import com.example.bangkit_2024_ip_bpaai.ui.auth.login.LoginActivity
 import com.example.bangkit_2024_ip_bpaai.ui.detail.DetailStoryActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -35,6 +33,8 @@ class HomeActivity : AppCompatActivity() {
 
         viewModel.getStories(userModel.token!!)
 
+        topBar()
+
         viewModel.listStory.observe(this) {
             setStoryData(it)
         }
@@ -46,31 +46,26 @@ class HomeActivity : AppCompatActivity() {
         addStory()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.option_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.translate -> {
-                val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-                startActivity(intent)
-                true
-            }
-            R.id.account -> {
-                val intent = Intent(this@HomeActivity, AccountActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            else -> false
-        }
-    }
-
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
+    }
+
+    private fun topBar() {
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.translate -> {
+                    val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+                    startActivity(intent)
+                    true
+                }
+                R.id.logout -> {
+                    logout()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setStoryData(story: List<ListStoryItem>) {
@@ -90,7 +85,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showSelectedStory(data: ListStoryItem) {
         val moveWithParcelableIntent = Intent(this@HomeActivity, DetailStoryActivity::class.java)
-        moveWithParcelableIntent.putExtra(DetailStoryActivity.EXTRA_STORY, data.id)
+        moveWithParcelableIntent.putExtra(DetailStoryActivity.EXTRA_STORY_NAME, data.name)
+        moveWithParcelableIntent.putExtra(DetailStoryActivity.EXTRA_STORY_IMAGE, data.photoUrl)
+        moveWithParcelableIntent.putExtra(DetailStoryActivity.EXTRA_STORY_CREATED_AT, data.createdAt)
+        moveWithParcelableIntent.putExtra(DetailStoryActivity.EXTRA_STORY_DESC, data.description)
         startActivity(moveWithParcelableIntent)
     }
 
@@ -99,6 +97,16 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this@HomeActivity, AddStoryActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun logout() {
+        userModel.token = ""
+        userPreferences.setUser(userModel)
+
+        val intent = Intent(this@HomeActivity, LoginActivity::class.java)
+        startActivity(intent)
+
+        finish()
     }
 
     private fun showLoading(isLoading: Boolean) {

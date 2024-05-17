@@ -7,7 +7,7 @@ class UserPreferences(context: Context) {
 
     fun setUser(value: User) {
         val editor = preferences.edit()
-        editor.putString(TOKEN, "Bearer ${value.token}")
+        editor.putString(TOKEN, value.token)
         editor.apply()
     }
 
@@ -21,5 +21,6 @@ class UserPreferences(context: Context) {
     companion object {
         private const val PREFS_NAME = "user_pref"
         private const val TOKEN = "token"
+        private const val IS_LOGIN = "is_login"
     }
 }

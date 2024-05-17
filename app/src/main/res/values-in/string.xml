@@ -5,7 +5,6 @@
     <!-- Autentikasi -->
     <string name="login">Masuk</string>
     <string name="enter_email_password">Masukkan email and password kamu</string>
-    <string name="email">Email</string>
     <string name="invalid_email">Gunakan email format</string>
     <string name="password">Password</string>
     <string name="invalid_password">Password tidak boleh lebih dari 8 karakter</string>
@@ -20,9 +19,12 @@
 
     <!-- Home -->
     <string name="translate">Terjemahan</string>
-    <string name="account">Akun</string>
+    <string name="logout">Keluar</string>
     <string name="image_story">Gambar</string>
     <string name="name_story">Nama</string>
     <string name="desc_story">Deskripsi</string>
     <string name="created_at_story">11 Februari 2024</string>
+
+    <!-- Detail -->
+    <string name="back">Kembali</string>
 </resources>
