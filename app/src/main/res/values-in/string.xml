@@ -32,4 +32,6 @@
     <string name="camera">Kamera</string>
     <string name="gallery">Galeri</string>
     <string name="upload">Unggah</string>
+    <string name="empty_form_upload">Isi datanya terlebih dahulu</string>
+
 </resources>

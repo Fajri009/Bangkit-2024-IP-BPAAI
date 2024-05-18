@@ -2,8 +2,7 @@ package com.example.bangkit_2024_ip_bpaai.ui.home
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.bangkit_2024_ip_bpaai.data.remote.response.ListStoryItem
-import com.example.bangkit_2024_ip_bpaai.data.remote.response.Story
+import com.example.bangkit_2024_ip_bpaai.data.remote.response.*
 import com.example.bangkit_2024_ip_bpaai.data.remote.retrofit.ApiConfig
 import retrofit2.*
 

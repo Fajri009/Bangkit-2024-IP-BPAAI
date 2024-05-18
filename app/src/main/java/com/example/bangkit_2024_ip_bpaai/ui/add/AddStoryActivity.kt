@@ -5,10 +5,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bangkit_2024_ip_bpaai.R
 import com.example.bangkit_2024_ip_bpaai.data.local.User
 import com.example.bangkit_2024_ip_bpaai.data.local.UserPreferences
 import com.example.bangkit_2024_ip_bpaai.databinding.ActivityAddStoryBinding
@@ -68,7 +70,7 @@ class AddStoryActivity : AppCompatActivity() {
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
-        if (uri != null) { // Apabila null, artinya belum ada media yang dipilih
+        if (uri != null) {
             currentImageUri = uri
             showImage()
         } else {
@@ -83,22 +85,31 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun upload() {
+        val edDesc = binding.edDesc.text.toString()
+
         binding.btnUpload.setOnClickListener {
-            currentImageUri?.let { uri ->
-                val imageFile = uriToFile(uri, this)
-                val desc = binding.edDesc.text.toString()
+            if (currentImageUri == null || edDesc.isEmpty()) {
+                showToast(R.string.empty_form_upload)
+            } else {
+                currentImageUri?.let { uri ->
+                    val imageFile = uriToFile(uri, this)
+                    val desc = binding.edDesc.text.toString()
 
-                val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-                val requestBody = desc.toRequestBody("text/plain".toMediaType())
-                val multipartBody = MultipartBody.Part.createFormData(
-                    "photo",
-                    imageFile.name,
-                    requestImageFile
-                )
+                    val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+                    val requestBody = desc.toRequestBody("text/plain".toMediaType())
+                    val multipartBody = MultipartBody.Part.createFormData(
+                        "photo",
+                        imageFile.name,
+                        requestImageFile
+                    )
 
-                viewModel.addStories(userModel.token!!, multipartBody, requestBody)
-
-                finish()
+                    viewModel.addStories(userModel.token!!, multipartBody, requestBody)
+                    viewModel.addStory.observe(this) {
+                        if (it.error == false){
+                            finish()
+                        }
+                    }
+                }
             }
         }
     }
@@ -116,5 +127,9 @@ class AddStoryActivity : AppCompatActivity() {
             } else {
                 View.GONE
             }
+    }
+
+    private fun showToast(message: Int) {
+        Toast.makeText(this@AddStoryActivity, message, Toast.LENGTH_SHORT).show()
     }
 }
