@@ -27,4 +27,9 @@
 
     <!-- Detail -->
     <string name="back">Back</string>
+
+    <!-- Add Story -->
+    <string name="camera">Camera</string>
+    <string name="gallery">Galery</string>
+    <string name="upload">Upload</string>
 </resources>

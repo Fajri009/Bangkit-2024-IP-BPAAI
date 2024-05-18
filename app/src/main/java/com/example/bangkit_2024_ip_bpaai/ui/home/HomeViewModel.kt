@@ -26,8 +26,8 @@ class HomeViewModel: ViewModel() {
                 _isLoading.value = false
 
                 if (response.isSuccessful) {
-                    val list = (response.body()?.listStory as List<ListStoryItem>?)!!
-                    _listStory.value = list
+                    val list = response.body()?.listStory
+                    _listStory.value = list as List<ListStoryItem>?
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }

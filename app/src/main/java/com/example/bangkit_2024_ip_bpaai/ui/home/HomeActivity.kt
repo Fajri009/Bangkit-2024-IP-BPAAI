@@ -35,9 +35,6 @@ class HomeActivity : AppCompatActivity() {
 
         topBar()
 
-        viewModel.listStory.observe(this) {
-            setStoryData(it)
-        }
 
         viewModel.isLoading.observe(this) {
             showLoading(it)
@@ -49,6 +46,16 @@ class HomeActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.getStories(userModel.token!!)
+
+        viewModel.listStory.observe(this) {
+            getStoryData(it)
+        }
     }
 
     private fun topBar() {
@@ -68,7 +75,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun setStoryData(story: List<ListStoryItem>) {
+    private fun getStoryData(story: List<ListStoryItem>) {
         val layoutInflater = LinearLayoutManager(this)
         binding.rvStory.layoutManager = layoutInflater
 

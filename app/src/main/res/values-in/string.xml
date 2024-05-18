@@ -27,4 +27,9 @@
 
     <!-- Detail -->
     <string name="back">Kembali</string>
+
+    <!-- Add Story -->
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="upload">Unggah</string>
 </resources>
