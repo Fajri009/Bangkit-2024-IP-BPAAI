@@ -1,6 +1,5 @@
 package com.example.bangkit_2024_ip_bpaai.ui.add
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +13,6 @@ import com.example.bangkit_2024_ip_bpaai.R
 import com.example.bangkit_2024_ip_bpaai.data.local.User
 import com.example.bangkit_2024_ip_bpaai.data.local.UserPreferences
 import com.example.bangkit_2024_ip_bpaai.databinding.ActivityAddStoryBinding
-import com.example.bangkit_2024_ip_bpaai.ui.home.HomeActivity
 import com.example.bangkit_2024_ip_bpaai.utils.getImageUri
 import com.example.bangkit_2024_ip_bpaai.utils.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
@@ -85,10 +83,10 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun upload() {
-        val edDesc = binding.edDesc.text.toString()
+        val edDesc = binding.edDesc.text
 
         binding.btnUpload.setOnClickListener {
-            if (currentImageUri == null || edDesc.isEmpty()) {
+            if (currentImageUri == null || edDesc!!.isEmpty()) {
                 showToast(R.string.empty_form_upload)
             } else {
                 currentImageUri?.let { uri ->
